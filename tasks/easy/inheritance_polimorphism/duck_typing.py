@@ -19,3 +19,34 @@ i_love_science. Функция должна возвращать строку в
 
 https://www.youtube.com/watch?v=8o7ZKTvZpLc
 """
+
+
+class AmericanPerson:
+    @staticmethod
+    def i_love_science():
+        return 'I love science'
+
+
+class RussianPerson:
+    @staticmethod
+    def i_love_science():
+        return 'Я люблю науку'
+
+
+class GermanyPerson:
+    @staticmethod
+    def i_love_science():
+        return 'ich liebe Wissenschaft'
+
+
+def person_love_science(obj):
+    return f"{obj.__class__.__name__} says that: {obj.i_love_science()}"
+
+
+if __name__ == "__main__":
+    americanperson = AmericanPerson()
+    person_love_science(americanperson)
+    russianperson = RussianPerson()
+    person_love_science(russianperson)
+    germanyperson = GermanyPerson()
+    person_love_science(germanyperson)

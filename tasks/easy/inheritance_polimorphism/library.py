@@ -26,3 +26,41 @@
 
 Названия книг в сообщениях должны быть отсортированы по алфавиту.
 """
+
+
+class Person:
+    fullname: str
+    phone: str
+
+    def __init__(self, fullname: str, phone: str):
+        self.fullname = fullname
+        self.phone = phone
+
+
+class LibraryReader(Person):
+    uid: int
+    books: set
+
+    def __init__(self, fullname: str, phone: str, uid: int, books: set = set()):
+        super().__init__(fullname, phone)
+        self.uid = uid
+        self.books = books
+
+    def take_books(self, *args):
+        self.books.update(set(args))
+        if len(args) < 4:
+            return f"{self.fullname} взял(а) книги: {', '.join(sorted(args))}"
+        else:
+            return f"{self.fullname} взял(а) 4 книги"
+
+    def return_book(self, *args):
+        __not_return_book = set(args).difference(self.books)
+        if not __not_return_book:
+            if len(args) < 4:
+                self.books = self.books.difference(set(args))
+                return f"{self.fullname} вернул(а) книги: {', '.join(sorted(args))}"
+            else:
+                self.books = self.books.difference(set(args))
+                return f"{self.fullname} вернул(а) 4 книги"
+        else:
+            raise ValueError(f"{self.fullname} не брал: {', '.join(sorted(__not_return_book))}")
